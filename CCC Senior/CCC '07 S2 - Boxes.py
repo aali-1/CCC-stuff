@@ -1,5 +1,6 @@
 import sys
 from functools import reduce
+input = sys.stdin.readline
 def fits(x,y):
     x.sort(reverse=True)
     y.sort(reverse=True)
@@ -7,15 +8,15 @@ def fits(x,y):
         if x[z]>y[z]:
             return False
     return True
-n=int(sys.stdin.readline())
+n=int(input())
 boxes=[]
 for _ in range(n):
-    f=[int(x) for x in sys.stdin.readline().split()]
+    f=[int(x) for x in input().split()]
     boxes.append(f)
-boxes.sort(key=lambda d: reduce(lambda x, y: x * y, d))
-for _ in range(int(sys.stdin.readline())):
+boxes.sort(key=lambda d: reduce(lambda x, y: x * y, d)) #sort based on volume
+for _ in range(int(input())):
     found=False
-    y=[int(x) for x in sys.stdin.readline().split()]
+    y=[int(x) for x in input().split()]
     for z in range(n):
         if fits(y,boxes[z]):
             found=True
@@ -23,14 +24,3 @@ for _ in range(int(sys.stdin.readline())):
             break
     if not found:
         print('Item does not fit.')
-    
-    
-'''
-3
-1 2 3
-3 4 5
-2 3 4
-1
-1 1 1
-
-'''

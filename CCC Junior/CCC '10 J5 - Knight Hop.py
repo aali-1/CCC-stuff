@@ -1,6 +1,14 @@
 import sys
 visited = [[False for i in range(9)] for j in range(9)]
 input = sys.stdin.readline
+
+def works(x):
+    if any(i<=0 for i in x) or any(i>8 for i in x):
+        return False
+    elif visited[x[0]][x[1]]==True:
+        return False
+    return True
+
 start = [int(x) for x in input().split()]
 end = [int(x) for x in input().split()]
 visited[start[0]][start[1]]=True
@@ -22,28 +30,17 @@ while count<7:
         newvalues.append([x+2,y-1])
         newvalues.append([x-2,y+1])
         newvalues.append([x-2,y-1])
-    for x in newvalues:
-        if any(i<=0 for i in x):
-            newvalues.remove(x)
-        elif any(i>8 for i in x):
-            newvalues.remove(x)
-        elif visited[x[0]][x[1]]==True:
-            newvalues.remove(x)
-    for x in newvalues:
-        if any(i<=0 for i in x):
-            newvalues.remove(x)
-        elif any(i>8 for i in x):
-            newvalues.remove(x)
-        elif visited[x[0]][x[1]]==True:
-            newvalues.remove(x)
+        
+    newvalues = [x for x in newvalues if works(x)]
+    
     for x in newvalues:
         try:
             visited[x[0]][x[1]]=True
         except(IndexError):
             pass
+        
     values.clear()
     values = newvalues.copy()
-    #print('v',values)
     newvalues.clear()
     count+=1
     

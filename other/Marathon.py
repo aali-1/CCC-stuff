@@ -5,6 +5,7 @@ for x in range(1,N+1):
     ratings[x]+=ratings[x-1] #PREFIX SUM ARRAY CODE
 for _ in range(Q):
     a,b = map(int,sys.stdin.readline().split())
+    
     print(ratings[-1]-ratings[b]+ratings[a-1])
 
 '''
